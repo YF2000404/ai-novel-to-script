@@ -1,2 +1,65 @@
-# ai-novel-to-script
-很多小说作者希望将自己的作品改编成剧本，请开发一款 AI 辅助剧本创作工具，降低改编门槛，提升效率。  要求：能将 3 个章节以上的小说文本自动转换为结构化剧本（YAML 格式），让作者可以快速获得可编辑、可进一步打磨的剧本初稿。
+# AI Novel To Script
+
+## Project Overview
+
+An AI-assisted screenplay generation tool that converts long-form novels into structured YAML scripts.
+
+The system aims to help authors quickly transform novels into editable screenplay drafts.
+
+---
+
+## Features
+
+- Novel chapter parsing
+- Character extraction
+- Scene extraction
+- Event extraction
+- Dialogue extraction
+- YAML screenplay generation
+
+---
+
+## Development Roadmap
+
+### Phase 1
+
+- [ ] Design YAML Schema
+- [ ] Define screenplay data structure
+
+### Phase 2
+
+- [ ] Chapter segmentation
+- [ ] Character extraction
+
+### Phase 3
+
+- [ ] Scene extraction
+- [ ] Event extraction
+
+### Phase 4
+
+- [ ] YAML generation
+
+### Phase 5
+
+- [ ] Frontend visualization
+
+---
+
+## Repository Structure
+
+```
+docs/
+src/
+tests/
+sample_data/
+```
+
+---
+
+## Tech Stack
+
+- Python
+- OpenAI Compatible LLM
+- YAML
+- GitHub
