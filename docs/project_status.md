@@ -167,10 +167,17 @@ ai   -> mock LLM-based extraction
 
 ### Stage 4: Build Web Interface
 
-- Add upload interface
+Status: Not Started
+
+Planned items:
+
+- Add a simple web interface
+- Add novel text upload or text input
 - Add conversion button
-- Display YAML result
-- Add YAML download
+- Support rule-based and AI mock extraction mode
+- Display generated YAML result
+- Add YAML download feature
+- Keep the interface simple and demo-friendly
 
 ### Stage 5: Final Submission
 
