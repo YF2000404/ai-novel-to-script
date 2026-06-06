@@ -41,6 +41,15 @@ def test_generate_yaml_basic_structure():
         }
     ]
 
+    dialogues = [
+        {
+            "id": "dialogue_001",
+            "chapter": 1,
+            "speaker": "林凡",
+            "content": "我必须知道真相。"
+        }
+    ]
+
     scenes = [
         {
             "id": "scene_001",
@@ -49,29 +58,46 @@ def test_generate_yaml_basic_structure():
         }
     ]
 
-    yaml_text = generate_yaml(chapters, characters, locations, events, scenes)
+    yaml_text = generate_yaml(
+        chapters,
+        characters,
+        locations,
+        events,
+        dialogues,
+        scenes
+    )
 
     assert "metadata:" in yaml_text
     assert "chapter_count: 1" in yaml_text
     assert "character_count: 1" in yaml_text
     assert "location_count: 1" in yaml_text
     assert "event_count: 1" in yaml_text
+    assert "dialogue_count: 1" in yaml_text
     assert "scene_count: 1" in yaml_text
+
     assert "characters:" in yaml_text
     assert "name: 林凡" in yaml_text
+
     assert "locations:" in yaml_text
     assert "name: 青山村" in yaml_text
+
     assert "events:" in yaml_text
     assert "type: wake_up" in yaml_text
+
+    assert "dialogues:" in yaml_text
+    assert "speaker: 林凡" in yaml_text
+    assert "content: 我必须知道真相。" in yaml_text
+
     assert "scenes:" in yaml_text
     assert "summary: 林凡醒来了。" in yaml_text
 
 
 def test_generate_yaml_empty_input():
-    yaml_text = generate_yaml([], [], [], [], [])
+    yaml_text = generate_yaml([], [], [], [], [], [])
 
     assert "chapter_count: 0" in yaml_text
     assert "character_count: 0" in yaml_text
     assert "location_count: 0" in yaml_text
     assert "event_count: 0" in yaml_text
+    assert "dialogue_count: 0" in yaml_text
     assert "scene_count: 0" in yaml_text

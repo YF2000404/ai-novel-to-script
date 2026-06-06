@@ -5,9 +5,10 @@ This module converts extracted novel information into YAML text.
 """
 
 
-def generate_yaml(chapters, characters, locations, events, scenes):
+def generate_yaml(chapters, characters, locations, events, dialogues, scenes):
     """
-    Generate YAML text from chapters, characters, locations, events, and scenes.
+    Generate YAML text from chapters, characters, locations, events,
+    dialogues, and scenes.
 
     This initial version builds YAML manually to avoid external dependencies.
     """
@@ -18,6 +19,7 @@ def generate_yaml(chapters, characters, locations, events, scenes):
     lines.append(f"  character_count: {len(characters)}")
     lines.append(f"  location_count: {len(locations)}")
     lines.append(f"  event_count: {len(events)}")
+    lines.append(f"  dialogue_count: {len(dialogues)}")
     lines.append(f"  scene_count: {len(scenes)}")
     lines.append("")
 
@@ -39,6 +41,14 @@ def generate_yaml(chapters, characters, locations, events, scenes):
         lines.append(f"    chapter: {event['chapter']}")
         lines.append(f"    type: {event['type']}")
         lines.append(f"    description: {event['description']}")
+    lines.append("")
+
+    lines.append("dialogues:")
+    for dialogue in dialogues:
+        lines.append(f"  - id: {dialogue['id']}")
+        lines.append(f"    chapter: {dialogue['chapter']}")
+        lines.append(f"    speaker: {dialogue['speaker']}")
+        lines.append(f"    content: {dialogue['content']}")
     lines.append("")
 
     lines.append("scenes:")
