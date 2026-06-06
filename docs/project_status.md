@@ -85,10 +85,14 @@ The current YAML output contains:
 
 ### Stage 1: Stabilize MVP
 
-- Add `.gitignore`
-- Add `requirements.txt`
-- Add pipeline test
-- Update README with test instructions
+Status: Completed
+
+Completed items:
+
+- Added `.gitignore`
+- Added `requirements.txt`
+- Added README setup and test instructions
+- Added basic pipeline test
 
 ### Stage 2: Improve YAML Schema
 
