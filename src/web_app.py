@@ -15,7 +15,11 @@ from scene_extractor import extract_scenes
 from yaml_generator import generate_yaml
 
 
-app = Flask(__name__, template_folder="../templates")
+app = Flask(
+    __name__,
+    template_folder="../templates",
+    static_folder="../static"
+)
 
 
 @app.route("/", methods=["GET", "POST"])
