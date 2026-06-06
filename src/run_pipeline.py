@@ -8,6 +8,7 @@ from chapter_parser import split_chapters
 from character_extractor import extract_characters
 from location_extractor import extract_locations
 from event_extractor import extract_events
+from dialogue_extractor import extract_dialogues
 from scene_extractor import extract_scenes
 from yaml_generator import generate_yaml
 
@@ -22,9 +23,17 @@ def main():
     characters = extract_characters(chapters)
     locations = extract_locations(chapters)
     events = extract_events(chapters)
+    dialogues = extract_dialogues(chapters)
     scenes = extract_scenes(chapters)
 
-    yaml_text = generate_yaml(chapters, characters, locations, events, scenes)
+    yaml_text = generate_yaml(
+        chapters,
+        characters,
+        locations,
+        events,
+        dialogues,
+        scenes
+    )
 
     output_path.write_text(yaml_text, encoding="utf-8")
 
@@ -33,6 +42,7 @@ def main():
     print(f"Characters: {len(characters)}")
     print(f"Locations: {len(locations)}")
     print(f"Events: {len(events)}")
+    print(f"Dialogues: {len(dialogues)}")
     print(f"Scenes: {len(scenes)}")
     print(f"Output: {output_path}")
 
