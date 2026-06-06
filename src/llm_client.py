@@ -3,8 +3,9 @@ LLM client module.
 
 This module provides a simple interface for LLM calls.
 
-The current version uses a mock client by default so that the project can run
-without an API key.
+The current project uses MockLLMClient by default so that it can run without
+an API key. RealLLMClient is provided as a skeleton for future real API
+integration.
 """
 
 import json
@@ -81,6 +82,52 @@ class MockLLMClient:
         return json.dumps(data, ensure_ascii=False)
 
 
+class RealLLMClient:
+    """
+    Skeleton client for future real LLM API integration.
+
+    This class reads configuration from environment variables, but does not
+    call a real API yet.
+    """
+
+    def __init__(self):
+        self.api_key = os.getenv("LLM_API_KEY", "")
+        self.base_url = os.getenv("LLM_BASE_URL", "")
+        self.model = os.getenv("LLM_MODEL", "")
+
+    def validate_config(self):
+        """
+        Validate that required real LLM configuration exists.
+        """
+        missing_fields = []
+
+        if not self.api_key:
+            missing_fields.append("LLM_API_KEY")
+
+        if not self.base_url:
+            missing_fields.append("LLM_BASE_URL")
+
+        if not self.model:
+            missing_fields.append("LLM_MODEL")
+
+        if missing_fields:
+            raise RuntimeError(
+                "Missing real LLM configuration: "
+                + ", ".join(missing_fields)
+            )
+
+    def call(self, prompt):
+        """
+        Placeholder for future real LLM API calls.
+        """
+        self.validate_config()
+
+        raise NotImplementedError(
+            "Real LLM API call is not implemented yet. "
+            "Use LLM_MODE=mock for the current version."
+        )
+
+
 def call_llm(prompt, client=None):
     """
     Call an LLM client.
@@ -96,7 +143,9 @@ def call_llm(prompt, client=None):
     if llm_mode == "mock":
         return MockLLMClient().call(prompt)
 
+    if llm_mode == "real":
+        return RealLLMClient().call(prompt)
+
     raise RuntimeError(
-        "Real LLM mode is not implemented yet. "
-        "Please use LLM_MODE=mock for the current version."
+        "Unsupported LLM_MODE. Use LLM_MODE=mock or LLM_MODE=real."
     )
