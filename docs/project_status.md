@@ -56,14 +56,26 @@ sample_data/output_script.yaml
 
 ## Current Output Structure
 
-The current YAML output contains:
+The current YAML output uses schema version `0.2`.
+
+The output contains:
 
 - metadata
 - characters
 - locations
+- scenes
+
+Each scene contains:
+
+- chapter number
+- title
+- location reference
+- participants
+- summary
+- dramatic purpose
+- actions
 - events
 - dialogues
-- scenes
 
 ---
 
@@ -107,9 +119,20 @@ Completed items:
 
 ### Stage 2: Improve YAML Schema
 
-- Upgrade schema to scene-centered screenplay structure
-- Add schema version
-- Add richer character, location, event, dialogue, and scene fields
+Status: Completed
+
+Completed items:
+
+- Updated `docs/schema_design.md` with scene-centered schema version `0.2`
+- Added schema version metadata
+- Updated YAML generator to produce scene-centered screenplay output
+- Added character role, description, and first appearance fields
+- Added location descriptions
+- Moved events and dialogues into scene-level structures
+- Added participants, actions, and dramatic purpose under each scene
+- Updated YAML generator tests
+- Updated pipeline test for schema version `0.2`
+- Updated README with schema version `0.2` explanation
 
 ### Stage 3: Add LLM Support
 
