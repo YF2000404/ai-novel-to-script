@@ -152,3 +152,31 @@ sample_data/output_script.yaml
 - Add event extraction
 - Add dialogue extraction
 - Build a web interface for uploading novels and downloading YAML scripts
+
+## Development Setup
+
+Install dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the basic conversion pipeline with:
+
+```bash
+python src/run_pipeline.py
+```
+
+Run tests with:
+
+```bash
+pytest
+```
+
+The generated YAML output will be written to:
+
+```text
+sample_data/output_script.yaml
+```
+
+This generated file is ignored by Git because it is produced by running the pipeline.
