@@ -3,57 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>AI Novel To Script</title>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 </head>
 <body>
-    <h1>AI Novel To Script</h1>
+    <main class="page">
+        <section class="hero">
+            <h1>AI Novel To Script</h1>
+            <p>
+                Convert Chinese novel text into scene-centered YAML screenplay
+                data.
+            </p>
+        </section>
 
-    <p>
-        Convert Chinese novel text into scene-centered YAML screenplay data.
-    </p>
+        <section class="panel">
+            <form method="post">
+                <label for="novel_text" class="label">Novel Text</label>
 
-    <form method="post">
-        <div>
-            <label for="novel_text">Novel Text</label>
-        </div>
+                <textarea
+                    id="novel_text"
+                    name="novel_text"
+                    rows="18"
+                    placeholder="Paste novel text here..."
+                >{{ novel_text }}</textarea>
 
-        <div>
-            <textarea
-                id="novel_text"
-                name="novel_text"
-                rows="18"
-                cols="100"
-                placeholder="Paste novel text here..."
-            >{{ novel_text }}</textarea>
-        </div>
+                <div class="controls">
+                    <div>
+                        <label for="extraction_mode" class="label">
+                            Extraction Mode
+                        </label>
 
-        <br>
+                        <select
+                            id="extraction_mode"
+                            name="extraction_mode"
+                        >
+                            <option
+                                value="rule"
+                                {% if selected_mode == "rule" %}selected{% endif %}
+                            >
+                                Rule-based extraction
+                            </option>
 
-        <div>
-            <label for="extraction_mode">Extraction Mode</label>
+                            <option
+                                value="ai"
+                                {% if selected_mode == "ai" %}selected{% endif %}
+                            >
+                                Mock LLM AI extraction
+                            </option>
+                        </select>
+                    </div>
 
-            <select id="extraction_mode" name="extraction_mode">
-                <option value="rule" {% if selected_mode == "rule" %}selected{% endif %}>
-                    Rule-based extraction
-                </option>
-                <option value="ai" {% if selected_mode == "ai" %}selected{% endif %}>
-                    Mock LLM AI extraction
-                </option>
-            </select>
-        </div>
+                    <button type="submit">Convert to YAML</button>
+                </div>
+            </form>
+        </section>
 
-        <br>
+        {% if error_message %}
+            <section class="error-box">
+                <h2>Error</h2>
+                <p>{{ error_message }}</p>
+            </section>
+        {% endif %}
 
-        <button type="submit">Convert to YAML</button>
-    </form>
+        {% if yaml_output %}
+            <section class="panel">
+                <div class="result-header">
+                    <h2>Generated YAML</h2>
+                    <span>Schema v0.2</span>
+                </div>
 
-    {% if error_message %}
-        <h2>Error</h2>
-        <p>{{ error_message }}</p>
-    {% endif %}
-
-    {% if yaml_output %}
-        <h2>Generated YAML</h2>
-        <pre>{{ yaml_output }}</pre>
-    {% endif %}
+                <pre>{{ yaml_output }}</pre>
+            </section>
+        {% endif %}
+    </main>
 </body>
 </html>
