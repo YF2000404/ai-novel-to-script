@@ -7,6 +7,7 @@ from pathlib import Path
 from chapter_parser import split_chapters
 from character_extractor import extract_characters
 from location_extractor import extract_locations
+from event_extractor import extract_events
 from scene_extractor import extract_scenes
 from yaml_generator import generate_yaml
 
@@ -20,9 +21,10 @@ def main():
     chapters = split_chapters(novel_text)
     characters = extract_characters(chapters)
     locations = extract_locations(chapters)
+    events = extract_events(chapters)
     scenes = extract_scenes(chapters)
 
-    yaml_text = generate_yaml(chapters, characters, locations, scenes)
+    yaml_text = generate_yaml(chapters, characters, locations, events, scenes)
 
     output_path.write_text(yaml_text, encoding="utf-8")
 
@@ -30,6 +32,7 @@ def main():
     print(f"Chapters: {len(chapters)}")
     print(f"Characters: {len(characters)}")
     print(f"Locations: {len(locations)}")
+    print(f"Events: {len(events)}")
     print(f"Scenes: {len(scenes)}")
     print(f"Output: {output_path}")
 
