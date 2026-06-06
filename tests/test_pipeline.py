@@ -45,8 +45,21 @@ def test_basic_pipeline_with_sample_novel():
     assert len(scenes) == 3
 
     assert "metadata:" in yaml_text
+    assert 'schema_version: "0.2"' in yaml_text
+    assert 'project_name: "AI Novel To Script"' in yaml_text
+    assert 'source_type: "novel"' in yaml_text
+    assert 'language: "zh-CN"' in yaml_text
+
     assert "characters:" in yaml_text
+    assert "role: protagonist" in yaml_text
+    assert "first_appearance:" in yaml_text
+
     assert "locations:" in yaml_text
+    assert 'description: "Extracted location from source novel."' in yaml_text
+
+    assert "scenes:" in yaml_text
+    assert "participants:" in yaml_text
+    assert "dramatic_purpose:" in yaml_text
+    assert "actions:" in yaml_text
     assert "events:" in yaml_text
     assert "dialogues:" in yaml_text
-    assert "scenes:" in yaml_text
