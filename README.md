@@ -66,7 +66,7 @@ sample_data/
 
 ## Current Prototype
 
-The current prototype supports a basic rule-based pipeline:
+The current prototype supports a rule-based novel-to-screenplay pipeline using YAML schema version `0.2`.
 
 ```text
 Sample Novel
@@ -75,16 +75,78 @@ Chapter Parser
 ↓
 Character Extractor
 ↓
+Location Extractor
+↓
+Event Extractor
+↓
+Dialogue Extractor
+↓
 Scene Extractor
 ↓
-YAML Generator
+Scene-Centered YAML Generator
 ↓
-YAML Output
+YAML Screenplay Output
 ```
 
-This version does not use an external LLM yet. It focuses on building a clear and testable software structure first.
+This version does not use an external LLM yet. It focuses on building a clear, testable, and extensible software structure first.
 
 ---
+
+## YAML Schema Version
+
+Current schema version:
+
+```text
+0.2
+```
+
+The current YAML output uses a scene-centered screenplay structure.
+
+Instead of only listing characters, locations, events, and dialogues separately, the output organizes screenplay content around scenes.
+
+Each scene may include:
+
+- source chapter number
+- scene title
+- location reference
+- participating characters
+- scene summary
+- dramatic purpose
+- visible actions
+- scene-level events
+- scene-level dialogues
+
+This structure is designed to support future storyboard generation, image generation prompts, and AI video generation workflows.
+
+---
+
+## How to Run
+
+Install dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the full conversion pipeline with:
+
+```bash
+python src/run_pipeline.py
+```
+
+Run tests with:
+
+```bash
+pytest
+```
+
+The generated YAML output will be written to:
+
+```text
+sample_data/output_script.yaml
+```
+
+This generated file is ignored by Git because it is produced by running the pipeline.
 
 ## Repository Structure
 
