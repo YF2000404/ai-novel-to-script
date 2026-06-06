@@ -183,6 +183,76 @@ event_extractor.py
 dialogue_extractor.py
 ```
 
+## Web Interface
+
+The project now includes a simple Flask web interface for demo usage.
+
+The web interface allows users to:
+
+- paste Chinese novel text
+- choose extraction mode
+- convert the novel into scene-centered YAML
+- view the generated YAML result
+- download the YAML file
+
+---
+
+## Run Web App
+
+Install dependencies first:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the Flask web app:
+
+```bash
+python src/web_app.py
+```
+
+Then open the following address in a browser:
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+## Web App Workflow
+
+```text
+Open Web Page
+↓
+Paste Novel Text
+↓
+Choose Extraction Mode
+↓
+Click Convert to YAML
+↓
+View Generated YAML
+↓
+Download YAML
+```
+
+---
+
+## Supported Web Extraction Modes
+
+The web interface supports the same extraction modes as the command-line pipeline:
+
+```text
+rule -> local rule-based extraction
+ai   -> mock LLM-based extraction
+```
+
+The default mode is:
+
+```text
+rule
+```
+
+The AI mode currently uses `MockLLMClient`, so no real API key is required.
 ---
 
 ## Run AI Pipeline
