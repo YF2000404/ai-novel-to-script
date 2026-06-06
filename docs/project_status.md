@@ -136,10 +136,34 @@ Completed items:
 
 ### Stage 3: Add LLM Support
 
-- Add LLM client module
-- Add prompt templates
-- Add AI-based extraction option
-- Add fallback to rule-based extraction
+Status: Completed
+
+Completed items:
+
+- Added `docs/llm_integration_plan.md`
+- Added `src/prompt_templates.py`
+- Added prompt template tests
+- Added `src/llm_client.py`
+- Added `MockLLMClient`
+- Added `RealLLMClient` skeleton
+- Added `.env.example`
+- Added AI character extractor
+- Added AI location extractor
+- Added AI event extractor
+- Added AI dialogue extractor
+- Added tests for all AI extractors
+- Added AI pipeline script
+- Added AI pipeline test
+- Added extraction mode selector
+- Added tests for extraction mode selector
+- Updated README with unified pipeline instructions
+- Kept rule-based extraction as the default fallback mode
+
+Current extraction modes:
+
+```text
+rule -> local rule-based extraction
+ai   -> mock LLM-based extraction
 
 ### Stage 4: Build Web Interface
 
