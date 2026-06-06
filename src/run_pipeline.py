@@ -1,14 +1,18 @@
 """
-Basic pipeline for converting a sample novel into YAML screenplay output.
+Unified pipeline for converting a sample novel into YAML screenplay output.
+
+The pipeline supports two extraction modes:
+
+- rule: local rule-based extractors
+- ai: mock LLM-based extractors
+
+The default mode is rule.
 """
 
 from pathlib import Path
 
 from chapter_parser import split_chapters
-from character_extractor import extract_characters
-from location_extractor import extract_locations
-from event_extractor import extract_events
-from dialogue_extractor import extract_dialogues
+from extraction_mode import run_extraction
 from scene_extractor import extract_scenes
 from yaml_generator import generate_yaml
 
@@ -20,29 +24,27 @@ def main():
     novel_text = input_path.read_text(encoding="utf-8")
 
     chapters = split_chapters(novel_text)
-    characters = extract_characters(chapters)
-    locations = extract_locations(chapters)
-    events = extract_events(chapters)
-    dialogues = extract_dialogues(chapters)
+    extraction_result = run_extraction(chapters)
     scenes = extract_scenes(chapters)
 
     yaml_text = generate_yaml(
         chapters,
-        characters,
-        locations,
-        events,
-        dialogues,
+        extraction_result["characters"],
+        extraction_result["locations"],
+        extraction_result["events"],
+        extraction_result["dialogues"],
         scenes
     )
 
     output_path.write_text(yaml_text, encoding="utf-8")
 
     print("Pipeline completed.")
+    print(f"Extraction mode: {extraction_result['mode']}")
     print(f"Chapters: {len(chapters)}")
-    print(f"Characters: {len(characters)}")
-    print(f"Locations: {len(locations)}")
-    print(f"Events: {len(events)}")
-    print(f"Dialogues: {len(dialogues)}")
+    print(f"Characters: {len(extraction_result['characters'])}")
+    print(f"Locations: {len(extraction_result['locations'])}")
+    print(f"Events: {len(extraction_result['events'])}")
+    print(f"Dialogues: {len(extraction_result['dialogues'])}")
     print(f"Scenes: {len(scenes)}")
     print(f"Output: {output_path}")
 
