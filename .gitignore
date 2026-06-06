@@ -14,6 +14,7 @@ env/
 
 # Generated output
 sample_data/output_script.yaml
+sample_data/output_ai_script.yaml
 
 # System files
 .DS_Store
