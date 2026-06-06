@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Novel To Script</title>
+</head>
+<body>
+    <h1>AI Novel To Script</h1>
+
+    <p>
+        Convert Chinese novel text into scene-centered YAML screenplay data.
+    </p>
+
+    <form method="post">
+        <div>
+            <label for="novel_text">Novel Text</label>
+        </div>
+
+        <div>
+            <textarea
+                id="novel_text"
+                name="novel_text"
+                rows="18"
+                cols="100"
+                placeholder="Paste novel text here..."
+            >{{ novel_text }}</textarea>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="extraction_mode">Extraction Mode</label>
+
+            <select id="extraction_mode" name="extraction_mode">
+                <option value="rule" {% if selected_mode == "rule" %}selected{% endif %}>
+                    Rule-based extraction
+                </option>
+                <option value="ai" {% if selected_mode == "ai" %}selected{% endif %}>
+                    Mock LLM AI extraction
+                </option>
+            </select>
+        </div>
+
+        <br>
+
+        <button type="submit">Convert to YAML</button>
+    </form>
+
+    {% if error_message %}
+        <h2>Error</h2>
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+    {% if yaml_output %}
+        <h2>Generated YAML</h2>
+        <pre>{{ yaml_output }}</pre>
+    {% endif %}
+</body>
+</html>
