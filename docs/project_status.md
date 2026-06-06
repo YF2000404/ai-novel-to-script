@@ -81,6 +81,17 @@ The current YAML output contains:
 
 ---
 
+## Current Engineering Status
+
+The current MVP has a complete rule-based pipeline and basic unit tests.
+
+The project can be tested with:
+
+```bash
+pytest
+
+---
+
 ## Next Development Stages
 
 ### Stage 1: Stabilize MVP
