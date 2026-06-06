@@ -74,6 +74,22 @@
                     <span>Schema v0.2</span>
                 </div>
 
+                <form method="post" action="/download" class="download-form">
+                    <input
+                        type="hidden"
+                        name="novel_text"
+                        value="{{ novel_text }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="extraction_mode"
+                        value="{{ selected_mode }}"
+                    >
+
+                    <button type="submit">Download YAML</button>
+                </form>
+
                 <pre>{{ yaml_output }}</pre>
             </section>
         {% endif %}
