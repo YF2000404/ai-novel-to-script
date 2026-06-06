@@ -167,21 +167,39 @@ ai   -> mock LLM-based extraction
 
 ### Stage 4: Build Web Interface
 
-Status: Not Started
+Status: Completed
 
-Planned items:
+Completed items:
 
-- Add a simple web interface
-- Add novel text upload or text input
-- Add conversion button
-- Support rule-based and AI mock extraction mode
-- Display generated YAML result
-- Add YAML download feature
-- Keep the interface simple and demo-friendly
+- Added `docs/web_interface_plan.md`
+- Added Flask dependency
+- Added `src/web_app.py`
+- Added `templates/index.html`
+- Added `static/style.css`
+- Added novel text input area
+- Added extraction mode selector
+- Added YAML conversion button
+- Added generated YAML display area
+- Added YAML download support
+- Added Flask web app tests
+- Updated README with web interface instructions
+
+Current web app command:
+
+```bash
+python src/web_app.py
 
 ### Stage 5: Final Submission
 
+Status: Ready to Start
+
+Planned items:
+
 - Polish README
-- Add demo video link
 - Add screenshots
+- Add demo video link
 - Add final project explanation
+- Verify all tests pass
+- Verify web app can run locally
+- Verify GitHub PR history is clear
+- Verify repository is publicly accessible
