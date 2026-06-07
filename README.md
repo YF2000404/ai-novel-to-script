@@ -1,5 +1,11 @@
 # AI Novel To Script
 
+## Demo Video
+
+[Watch the demo video on Bilibili](https://www.bilibili.com/video/BV1bYE46gEM6)
+
+---
+
 ## Project Overview
 
 AI Novel To Script is an AI-assisted screenplay generation tool that converts long-form Chinese novels into structured YAML screenplay data.
@@ -18,7 +24,7 @@ Image Generation
 Video Generation
 ```
 
-The current version focuses on converting novel text into scene-centered screenplay YAML.
+The current version focuses on converting Chinese novel text into scene-centered screenplay YAML.
 
 ---
 
@@ -26,7 +32,7 @@ The current version focuses on converting novel text into scene-centered screenp
 
 本项目用于将中文长篇小说自动转换为结构化 YAML 剧本。
 
-当前版本已经支持：
+当前版本支持：
 
 - 小说章节切分
 - 人物提取
@@ -37,6 +43,8 @@ The current version focuses on converting novel text into scene-centered screenp
 - Scene-centered YAML 剧本生成
 - Rule-based extraction mode
 - Mock LLM-based AI extraction mode
+- Flask Web Interface
+- YAML result display and download
 - 基础单元测试与 pipeline 测试
 
 ---
@@ -46,7 +54,7 @@ The current version focuses on converting novel text into scene-centered screenp
 Current project version:
 
 ```text
-Rule-based MVP + Mock LLM AI Pipeline
+Rule-based MVP + Mock LLM AI Pipeline + Flask Web Interface
 ```
 
 Current YAML schema version:
@@ -61,7 +69,13 @@ Current main pipeline entry point:
 python src/run_pipeline.py
 ```
 
-The project currently supports two extraction modes:
+Current web app entry point:
+
+```bash
+python src/web_app.py
+```
+
+The project supports two extraction modes:
 
 ```text
 rule  -> local rule-based extraction
@@ -144,12 +158,26 @@ This structure is designed to support future storyboard generation, image genera
 
 ---
 
+### 5. Web Interface
+
+The project includes a simple Flask web interface for demo usage.
+
+The web interface allows users to:
+
+- paste Chinese novel text
+- choose extraction mode
+- convert the novel into scene-centered YAML
+- view the generated YAML result
+- download the YAML file
+
+---
+
 ## System Pipeline
 
 ### Unified Pipeline
 
 ```text
-Sample Novel
+Sample Novel / User Input
 ↓
 Chapter Parser
 ↓
@@ -183,17 +211,26 @@ event_extractor.py
 dialogue_extractor.py
 ```
 
-## Web Interface
+---
 
-The project now includes a simple Flask web interface for demo usage.
+## Run AI Mock Pipeline
 
-The web interface allows users to:
+The AI mode currently uses `MockLLMClient`.
 
-- paste Chinese novel text
-- choose extraction mode
-- convert the novel into scene-centered YAML
-- view the generated YAML result
-- download the YAML file
+On macOS/Linux:
+
+```bash
+EXTRACTION_MODE=ai python src/run_pipeline.py
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:EXTRACTION_MODE="ai"
+python src/run_pipeline.py
+```
+
+The current AI mode does not require a real API key.
 
 ---
 
@@ -253,26 +290,6 @@ rule
 ```
 
 The AI mode currently uses `MockLLMClient`, so no real API key is required.
----
-
-## Run AI Pipeline
-
-The AI mode currently uses `MockLLMClient`.
-
-On macOS/Linux:
-
-```bash
-EXTRACTION_MODE=ai python src/run_pipeline.py
-```
-
-On Windows PowerShell:
-
-```powershell
-$env:EXTRACTION_MODE="ai"
-python src/run_pipeline.py
-```
-
-The current AI mode does not require a real API key.
 
 ---
 
@@ -395,6 +412,7 @@ docs/
   system_design.md
   project_status.md
   llm_integration_plan.md
+  web_interface_plan.md
 
 src/
   chapter_parser.py
@@ -416,6 +434,13 @@ src/
   run_parser_demo.py
   run_pipeline.py
   run_ai_pipeline.py
+  web_app.py
+
+templates/
+  index.html
+
+static/
+  style.css
 
 tests/
   test_chapter_parser.py
@@ -435,6 +460,7 @@ tests/
   test_ai_dialogue_extractor.py
   test_ai_pipeline.py
   test_extraction_mode.py
+  test_web_app.py
 
 sample_data/
   sample_novel.txt
@@ -461,6 +487,12 @@ Run all tests:
 pytest
 ```
 
+Expected result:
+
+```text
+66 passed
+```
+
 Run the default rule-based pipeline:
 
 ```bash
@@ -480,11 +512,24 @@ $env:EXTRACTION_MODE="ai"
 python src/run_pipeline.py
 ```
 
+Run the web app:
+
+```bash
+python src/web_app.py
+```
+
+Then open:
+
+```text
+http://127.0.0.1:5000
+```
+
 ---
 
 ## Tech Stack
 
 - Python
+- Flask
 - YAML
 - Regular expressions
 - Mock LLM client
@@ -505,7 +550,7 @@ Known limitations:
 - Real LLM API calls are not implemented yet.
 - Scene extraction currently treats each chapter as one scene.
 - Character and location matching are still simple.
-- No web interface yet.
+- The web interface is simple and mainly designed for demo usage.
 - No direct storyboard or video generation yet.
 
 ---
@@ -545,7 +590,7 @@ Completed items:
 
 ### Stage 3: Add LLM Support
 
-Status: In Progress
+Status: Completed
 
 Completed items:
 
@@ -561,41 +606,45 @@ Completed items:
 - Added extraction mode selector
 - Added tests for extraction mode selector
 - Added `.env.example`
-
-Remaining items:
-
-- Update project status document
-- Polish Stage 3 documentation
-- Optionally implement real API call support later
+- Kept rule-based extraction as the default fallback mode
 
 ---
 
 ### Stage 4: Build Web Interface
 
-Status: Not Started
+Status: Completed
 
-Planned items:
+Completed items:
 
-- Add file upload interface
-- Add conversion button
-- Display generated YAML
-- Add YAML download feature
-- Prepare demo-friendly UI
+- Added web interface plan
+- Added Flask dependency
+- Added Flask web app
+- Added HTML template
+- Added CSS styling
+- Added novel text input area
+- Added extraction mode selector
+- Added YAML conversion button
+- Added generated YAML display area
+- Added YAML download support
+- Added web app tests
+- Updated README with web interface instructions
 
 ---
 
 ### Stage 5: Final Submission
 
-Status: Not Started
+Status: Completed
 
-Planned items:
+Completed items:
 
-- Polish README
-- Add screenshots
-- Add demo video link
-- Add final project explanation
-- Verify all PR and commit history
-- Verify repository is publicly accessible
+- Verified all tests pass
+- Verified rule-based pipeline runs locally
+- Verified AI mock pipeline runs locally
+- Verified Flask web app runs locally
+- Verified YAML display and download work
+- Added demo video link
+- Prepared final README
+- Verified repository is public
 
 ---
 
@@ -624,4 +673,38 @@ Planned future improvements:
 - Timeline visualization
 - Storyboard prompt generation
 - Image generation prompt generation
-- Web-based upload and download interface
+- AI video generation workflow support
+```
+
+Commit message 用：
+
+```text
+docs: finalize README with demo video link
+```
+
+PR 标题：
+
+```text
+docs: finalize README with demo video link
+```
+
+PR Description：
+
+```markdown
+## Feature Description
+
+Finalize README for project submission and add the demo video link.
+
+## Implementation
+
+- Added demo video link at the top of README
+- Updated current project status
+- Updated web interface information
+- Updated repository structure
+- Updated roadmap status for Stage 3, Stage 4, and Stage 5
+- Removed outdated limitation saying the project has no web interface
+
+## Testing
+
+Reviewed the README rendering in GitHub Markdown preview and checked that the demo video link is easy to find.
+```
